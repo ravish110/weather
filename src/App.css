@@ -113,3 +113,21 @@
     display: inline-block;
     text-align: center;
 }
+
+@media screen and (max-width: 576px) {
+    .App{
+        height: 100%;
+    }
+    .container{
+        flex-direction: column;
+        height: 100%;
+    }
+    .sideCityView {
+        border-radius: 25px;
+        width: auto;
+        padding: 20px 15px;
+    }
+    .today .sideCityView,.header{
+        width: auto;
+    }
+}

@@ -1,4 +1,4 @@
-export const WEATHER_API = 'http://api.openweathermap.org/data/2.5/forecast?' // q=${CITY}&appid=${API_KEY}
+export const WEATHER_API = 'https://api.openweathermap.org/data/2.5/forecast?' // q=${CITY}&appid=${API_KEY}
 
 // images
 export const IMAGE_ACCESS_KEY = 'lkgaV1PDK6JlYINRE9HJvo9ZJB9A7uJV2Bxli-bJsH8'

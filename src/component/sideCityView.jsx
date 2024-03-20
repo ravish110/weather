@@ -10,11 +10,7 @@ const SideCityView = () => {
   const searchTerm = useSelector(state => state.searchTerm);
   const [image, setImage] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
-  const [inputValue, setInputValue] = useState('Mumbai');
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
 
   useEffect(() => {
     const fetchCityImage = async () => {

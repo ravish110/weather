@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { IMAGE_ACCESS_KEY, WEATHER_API_KEY } from '../utils/constants';
 import Cloud from '../assets/cloud.PNG';
 import { WEATHER_API , CITY_IMG} from '../utils/constants';
+import SearchComponent from './search';
+import { useSelector } from 'react-redux';
 
 
 const SideCityView = () => {
+  const searchTerm = useSelector(state => state.searchTerm);
   const [image, setImage] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
   const [inputValue, setInputValue] = useState('Mumbai');
@@ -16,7 +19,7 @@ const SideCityView = () => {
   useEffect(() => {
     const fetchCityImage = async () => {
       try {
-        const response = await fetch(`${CITY_IMG}query=${inputValue}&client_id=${IMAGE_ACCESS_KEY}`);
+        const response = await fetch(`${CITY_IMG}query=${searchTerm}&client_id=${IMAGE_ACCESS_KEY}`);
         const data = await response.json();
         if (data.results.length > 0) {
           setImage(data.results[0].urls.regular);
@@ -28,7 +31,7 @@ const SideCityView = () => {
 
     const fetchWeatherData = async () => {
       try {
-        const response = await fetch(`${WEATHER_API}q=${inputValue}&appid=${WEATHER_API_KEY}`);
+        const response = await fetch(`${WEATHER_API}q=${searchTerm}&appid=${WEATHER_API_KEY}`);
         const data = await response.json();
         setWeatherData(data);
         console.log(data)
@@ -36,15 +39,16 @@ const SideCityView = () => {
         console.error('Error fetching weather data:', error);
       }
     };
-    if(inputValue.length > 2){
+    if(searchTerm.length > 2){
       fetchWeatherData();
       fetchCityImage();  
     }
-  }, [inputValue]);
+  }, [searchTerm]);
 
   return (
+    
     <div className='sideCityView'>
-      <input type="text" placeholder=' Search for places..' value={inputValue} onChange={handleInputChange} />
+      <SearchComponent />
       <div>
         <div>
           <img src={Cloud} alt="cloud" className='cloudImg'/>
